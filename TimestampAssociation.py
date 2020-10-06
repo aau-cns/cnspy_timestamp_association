@@ -140,7 +140,7 @@ class TimestampAssociation_Test(unittest.TestCase):
     start_time = None
 
     def tuple_list_2_csv(self, d, fn):
-        with open(fn, 'wb') as f:
+        with open(fn, 'w') as f:
             writer = csv.writer(f, lineterminator='\n')
             writer.writerow(['idx1', 'idx2'])
             for row in d:
@@ -158,7 +158,7 @@ class TimestampAssociation_Test(unittest.TestCase):
         self.start_time = time.time()
 
     def stop(self):
-        print "Process time: " + str((time.time() - self.start_time))
+        print("Process time: " + str((time.time() - self.start_time)))
 
     def test_load_from_CSV(self):
         df_t_est, df_t_gt = self.load_data()
