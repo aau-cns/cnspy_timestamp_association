@@ -19,36 +19,7 @@
 # Requirements:
 # sudo pip install numpy pandas
 ########################################################################################################################
-import logging
-import os
-import pandas as pandas
 import numpy as np
-import math
-
-
-class TimestampCSV2DataFrame:
-    data_frame = None
-    data_loaded = False
-
-    def __init__(self, filename=None):
-        if filename:
-            self.load_from_CSV(filename=filename)
-
-    def load_from_CSV(self, filename):
-        if os.path.exists(filename):
-            self.data_frame = TimestampCSV2DataFrame.load_CSV(filename=filename)
-            self.data_loaded = True
-
-    def get_t_vec(self):
-        if self.data_loaded:
-            return self.data_frame.as_matrix(['t'])
-        else:
-            return None
-
-    @staticmethod
-    def load_CSV(filename, sep='\s+|\,', comment='#', header=['t']):
-        data = pandas.read_csv(filename, sep=sep, comment=comment, header=None, names=header, engine='python')
-        return data
 
 
 class TimestampAssociation:
@@ -106,6 +77,7 @@ class TimestampAssociation:
 import unittest
 import time
 import csv
+from csv2dataframe.TimestampCSV2DataFrame import TimestampCSV2DataFrame
 
 
 class TimestampAssociation_Test(unittest.TestCase):
@@ -120,9 +92,9 @@ class TimestampAssociation_Test(unittest.TestCase):
 
     def load_data(self):
         df_t_est = TimestampCSV2DataFrame(
-            filename='./t_est.csv')
+            fn='./sample_data/t_est.csv')
         df_t_gt = TimestampCSV2DataFrame(
-            filename='./t_gt.csv')
+            fn='./sample_data/t_gt.csv')
 
         return df_t_est, df_t_gt
 
@@ -142,11 +114,6 @@ class TimestampAssociation_Test(unittest.TestCase):
 
         t_est = df_t_est.get_t_vec()
         t_gt = df_t_gt.get_t_vec()
-        self.start()
-        # matches = TimestampAssociation.associate(t_est.transpose().tolist()[0], t_gt.transpose().tolist()[0])
-        # self.stop()
-        # # takes: 15sec
-        # self.tuple_list_2_csv(d=matches, fn='matches1.txt')
 
         self.start()
         idx_est, idx_gt, t_est_matched, t_gt_matched = TimestampAssociation.associate_timestamps(
@@ -156,7 +123,7 @@ class TimestampAssociation_Test(unittest.TestCase):
         matches2 = zip(idx_est, idx_gt)
         self.stop()
         # takes: 0.5sec
-        self.tuple_list_2_csv(d=matches2, fn='matches2.txt')
+        self.tuple_list_2_csv(d=matches2, fn='./results/matches.txt')
 
 
 if __name__ == "__main__":
