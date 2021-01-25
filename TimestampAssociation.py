@@ -56,34 +56,6 @@ class TimestampAssociation:
         pass
 
     @staticmethod
-    def associate(first_stamps, second_stamps, offset=0.0, max_difference=0.02):
-        """
-        # Copyright (c) 2013, Juergen Sturm, TUM
-        associate timestamps
-
-        first_stamps, second_stamps: list of timestamps to associate
-
-        Output:
-        sorted list of matches (match_first_idx, match_second_idx)
-        """
-        potential_matches = [(abs(a - (b + offset)), idx_a, idx_b)
-                             for idx_a, a in enumerate(first_stamps)
-                             for idx_b, b in enumerate(second_stamps)
-                             if abs(a - (b + offset)) < max_difference]
-        potential_matches.sort()  # prefer the closest
-        matches = []
-        first_idxes = range(len(first_stamps))
-        second_idxes = range(len(second_stamps))
-        for diff, idx_a, idx_b in potential_matches:
-            if idx_a in first_idxes and idx_b in second_idxes:
-                first_idxes.remove(idx_a)
-                second_idxes.remove(idx_b)
-                matches.append((int(idx_a), int(idx_b)))
-
-        matches.sort()
-        return matches
-
-    @staticmethod
     def get_closest(array, values):
         # from: https://stackoverflow.com/a/46184652
         # by: https://stackoverflow.com/users/1536499/anthonybell
