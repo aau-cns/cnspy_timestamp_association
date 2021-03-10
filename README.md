@@ -1,7 +1,15 @@
 # Timestamp Association
 
-The class `TimestampAssociation` finds correspondences between to vectors, in our case containing timestamps. The aim is to find timestamp pairs with a configurable  `max_difference`.   
+The class `TimestampAssociation` finds correspondences between to vectors, in our case containing timestamps. The aim is to find timestamp pairs with a configurable  `max_difference`.
 
+## Installation
+
+Install the current code base from GitHub and pip install a link to that cloned copy
+```
+git clone https://gitlab.aau.at/aau-cns/py3_pkgs/timestamp_association.git
+cd timestamp_association
+pip install -e .
+```
 
 ## Dependencies
 
@@ -18,4 +26,4 @@ Please refer to the unit-test section in `TimestampAssociation.py`.
 
 Software License Agreement (GNU GPLv3  License), refer to the LICENSE file.
 
-*Sharing is caring!* - [Roland Jung](https://github.com/jungr-ait)  
+*Sharing is caring!* - [Roland Jung](https://github.com/jungr-ait)
