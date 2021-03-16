@@ -17,11 +17,14 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 ########################################################################################################################
+import os
 import unittest
 import time
 import csv
 from csv2dataframe.TimestampCSV2DataFrame import TimestampCSV2DataFrame
 from timestamp_association.TimestampAssociation import TimestampAssociation
+
+SAMPLE_DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sample_data')
 
 class TimestampAssociation_Test(unittest.TestCase):
     start_time = None
@@ -35,9 +38,9 @@ class TimestampAssociation_Test(unittest.TestCase):
 
     def load_data(self):
         df_t_est = TimestampCSV2DataFrame(
-            fn='./sample_data/t_est.csv')
+            fn=str(SAMPLE_DATA_DIR + '/t_est.csv'))
         df_t_gt = TimestampCSV2DataFrame(
-            fn='./sample_data/t_gt.csv')
+            fn=str(SAMPLE_DATA_DIR + '/t_gt.csv'))
 
         return df_t_est, df_t_gt
 
@@ -66,7 +69,7 @@ class TimestampAssociation_Test(unittest.TestCase):
         matches2 = zip(idx_est, idx_gt)
         self.stop()
         # takes: 0.5sec
-        self.tuple_list_2_csv(d=matches2, fn='./results/matches.txt')
+        self.tuple_list_2_csv(d=matches2, fn=str(SAMPLE_DATA_DIR + '/matches.txt'))
 
 
 if __name__ == "__main__":
