@@ -1,4 +1,4 @@
-# Timestamp Association
+# cnspy_timestamp_association
 
 The class `TimestampAssociation` finds correspondences between to vectors, in our case containing timestamps. The aim is to find timestamp pairs with a configurable  `max_difference`.
 
@@ -6,7 +6,7 @@ The class `TimestampAssociation` finds correspondences between to vectors, in ou
 
 Install the current code base from GitHub and pip install a link to that cloned copy
 ```
-git clone https://gitlab.aau.at/aau-cns/py3_pkgs/timestamp_association.git
+git clone https://gitlab.aau.at/aau-cns/py3_pkgs/cnspy_timestamp_association.git
 cd timestamp_association
 pip install -e .
 ```

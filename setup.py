@@ -14,18 +14,20 @@ with open(path.join(here, 'RELEASE'), encoding='utf-8') as f:
     release = f.read()
 
 setup(
-    name='timestamp_association',
+    name='cnspy_timestamp_association',
     version=release,
     author='Roland Jung',
     author_email='roland.jung@aau.at',    
     description='Associates vectors of timestamps.',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://gitlab.aau.at/aau-cns/py3_pkgs/timestamp_association/',
+    url='https://gitlab.aau.at/aau-cns/py3_pkgs/cnspy_timestamp_association/',
     project_urls={
-        "Bug Tracker": "https://gitlab.aau.at/aau-cns/py3_pkgs/timestamp_association/issues",
+        "Bug Tracker": "https://gitlab.aau.at/aau-cns/py3_pkgs/cnspy_timestamp_association/issues",
     },    
     classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
