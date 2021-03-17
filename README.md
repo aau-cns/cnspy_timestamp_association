@@ -7,7 +7,7 @@ The class `TimestampAssociation` finds correspondences between to vectors, in ou
 Install the current code base from GitHub and pip install a link to that cloned copy
 ```
 git clone https://gitlab.aau.at/aau-cns/py3_pkgs/cnspy_timestamp_association.git
-cd timestamp_association
+cd cnspy_timestamp_association
 pip install -e .
 ```
 
