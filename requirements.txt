@@ -1,6 +1,6 @@
 numpy
-[-e] git+https://gitlab.aau.at/aau-cns/py3_pkgs/ros_csv_formats.git#egg=ros_csv_formats
-[-e] git+https://gitlab.aau.at/aau-cns/py3_pkgs/csv2dataframe.git#egg=csv2dataframe
+cnspy_spatial_csv_formats
+cnspy_csv2dataframe
 
 
 
