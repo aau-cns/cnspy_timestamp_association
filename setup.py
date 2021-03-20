@@ -21,9 +21,9 @@ setup(
     description='Associates vectors of timestamps.',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://gitlab.aau.at/aau-cns/py3_pkgs/cnspy_timestamp_association/',
+    url='https://github.com/aau-cns/cnspy_timestamp_association/',
     project_urls={
-        "Bug Tracker": "https://gitlab.aau.at/aau-cns/py3_pkgs/cnspy_timestamp_association/issues",
+        "Bug Tracker": "https://github.com/aau-cns/cnspy_timestamp_association/issues",
     },    
     classifiers=[
         'Development Status :: 4 - Beta',

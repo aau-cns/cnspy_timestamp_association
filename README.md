@@ -6,17 +6,16 @@ The class `TimestampAssociation` finds correspondences between to vectors, in ou
 
 Install the current code base from GitHub and pip install a link to that cloned copy
 ```
-git clone https://gitlab.aau.at/aau-cns/py3_pkgs/cnspy_timestamp_association.git
+git clone https://github.com/aau-cns/cnspy_timestamp_association.git
 cd cnspy_timestamp_association
 pip install -e .
 ```
 
 ## Dependencies
 
-* [numpy]()
-* [ros_csv_formats]()
-* [csv2dataframe]()
+It is part of the [cnspy eco-system](hhttps://github.com/aau-cns/cnspy_eco_system_test) of the [cns-github](https://github.com/aau-cns) group.  
 
+* [numpy]()
 
 ## Examples
 
