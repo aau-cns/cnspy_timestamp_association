@@ -10,6 +10,10 @@ git clone https://github.com/aau-cns/cnspy_timestamp_association.git
 cd cnspy_timestamp_association
 pip install -e .
 ```
+or the [official package](https://pypi.org/project/cnspy-timestamp-association/) via
+```commandline
+pip install cnspy-timestamp-association
+```
 
 ## Dependencies
 
