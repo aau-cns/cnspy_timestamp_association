@@ -42,7 +42,7 @@ class TimestampAssociation:
         return array[idxs], idxs
 
     @staticmethod
-    def associate_timestamps(t_est, t_gt, offset=0.0, max_difference=0.02):
+    def associate_timestamps(t_est, t_gt, offset=0.0, max_difference=0.02, round_decimals=9, unique_timestamps=True):
         # returns idx_est, idx_gt, t_est_matched, t_gt_matched
         swapped = False
         if len(t_est) > len(t_gt):
@@ -53,6 +53,10 @@ class TimestampAssociation:
             t_vec1 = t_gt
             t_vec2 = t_est + offset
 
+        # round the timestamp arrays by N-decimals
+        t_vec1 = np.round(t_vec1, decimals=round_decimals)
+        t_vec2 = np.round(t_vec2, decimals=round_decimals)
+
         closest_t_vec1, idx1 = TimestampAssociation.get_closest(t_vec1.transpose().ravel(), t_vec2.transpose().ravel())
         idx2 = np.arange(0, len(idx1), dtype=np.int32)
         diff = np.abs(closest_t_vec1 - np.array(t_vec2.ravel()))
@@ -62,10 +66,23 @@ class TimestampAssociation:
         vec_1_matched = t_vec1[idx_1]
         vec_2_matched = t_vec2[idx_2]
 
+        # find uniques in both matched sets of timestamps
+        if unique_timestamps:
+            vec_1_matched_unique, unique_idx_1 = np.unique(vec_1_matched, return_index=True)
+            idx_1 = idx_1[unique_idx_1]
+            idx_2 = idx_2[unique_idx_1]
+            vec_2_matched = t_vec2[idx_2]
+
+            vec_2_matched_unique, unique_idx_2 = np.unique(vec_2_matched, return_index=True)
+            idx_1 = idx_1[unique_idx_2]
+            idx_2 = idx_2[unique_idx_2]
+            vec_1_matched = t_vec1[idx_1]
+            vec_2_matched = t_vec2[idx_2]
+
         # returns idx_est, idx_gt, t_est_matched, t_gt_matched
-        if not swapped:
-            return idx_2, idx_1, vec_2_matched, vec_1_matched
-        else:
+        if swapped:
             return idx_1, idx_2, vec_1_matched, vec_2_matched
+        else:
+            return idx_2, idx_1, vec_2_matched, vec_1_matched
 
 
