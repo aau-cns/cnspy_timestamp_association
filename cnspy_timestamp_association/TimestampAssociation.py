@@ -57,32 +57,33 @@ class TimestampAssociation:
         t_vec1 = np.round(t_vec1, decimals=round_decimals)
         t_vec2 = np.round(t_vec2, decimals=round_decimals)
 
-        closest_t_vec1, idx1 = TimestampAssociation.get_closest(t_vec1.transpose().ravel(), t_vec2.transpose().ravel())
-        idx2 = np.arange(0, len(idx1), dtype=np.int32)
-        diff = np.abs(closest_t_vec1 - np.array(t_vec2.ravel()))
-        mask_greater = np.where(diff >= max_difference)[0]
-        idx_1 = np.delete(idx1, mask_greater, axis=0)
-        idx_2 = np.delete(idx2, mask_greater, axis=0)
-        vec_1_matched = t_vec1[idx_1]
-        vec_2_matched = t_vec2[idx_2]
+        closest_t_vec1, idx_1 = TimestampAssociation.get_closest(t_vec1.transpose().ravel(), t_vec2.transpose().ravel())
+        idx_2 = np.arange(0, len(idx_1), dtype=np.int32)
+
+        if max_difference > 0:
+            diff = np.abs(closest_t_vec1 - np.array(t_vec2.ravel()))
+            mask_greater = np.where(diff >= max_difference)[0]
+            idx_1 = np.delete(idx_1, mask_greater, axis=0)
+            idx_2 = np.delete(idx_2, mask_greater, axis=0)
+
+        t_vec_1_matched = t_vec1[idx_1]
+        t_vec_2_matched = t_vec2[idx_2]
 
         # find uniques in both matched sets of timestamps
         if unique_timestamps:
-            vec_1_matched_unique, unique_idx_1 = np.unique(vec_1_matched, return_index=True)
-            idx_1 = idx_1[unique_idx_1]
-            idx_2 = idx_2[unique_idx_1]
-            vec_2_matched = t_vec2[idx_2]
+            vec_1_matched_unique, unique_idx_1 = np.unique(t_vec_1_matched, return_index=True)
+            vec_2_matched_unique, unique_idx_2 = np.unique(t_vec_2_matched, return_index=True)
+            common_indices = np.intersect1d(unique_idx_1, unique_idx_2)
 
-            vec_2_matched_unique, unique_idx_2 = np.unique(vec_2_matched, return_index=True)
-            idx_1 = idx_1[unique_idx_2]
-            idx_2 = idx_2[unique_idx_2]
-            vec_1_matched = t_vec1[idx_1]
-            vec_2_matched = t_vec2[idx_2]
+            idx_1 = idx_1[common_indices]
+            idx_2 = idx_2[common_indices]
+            t_vec_1_matched = t_vec1[idx_1]
+            t_vec_2_matched = t_vec2[idx_2]
 
         # returns idx_est, idx_gt, t_est_matched, t_gt_matched
         if swapped:
-            return idx_1, idx_2, vec_1_matched, vec_2_matched
+            return idx_1, idx_2, t_vec_1_matched, t_vec_2_matched
         else:
-            return idx_2, idx_1, vec_2_matched, vec_1_matched
+            return idx_2, idx_1, t_vec_2_matched, t_vec_1_matched
 
 
